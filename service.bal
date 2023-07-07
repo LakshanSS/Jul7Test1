@@ -1,4 +1,7 @@
 import ballerina/http;
+import ballerina/log;
+
+configurable string ccc = ?;
 
 # A service representing a network-accessible API
 # bound to port `9090`.
@@ -9,9 +12,10 @@ service / on new http:Listener(9090) {
     # + return - string name with hello message or error
     resource function get greeting(string name) returns string|error {
         // Send a response back to the caller.
+        log:printInfo("ccc: " + ccc);
         if name is "" {
             return error("name should not be empty!");
         }
-        return "Hello, " + name;
+        return "Hello, " + name + " ccc: " + ccc;
     }
 }
